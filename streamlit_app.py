@@ -89,8 +89,7 @@ def report_html(
           <table><tbody>{schedule_rows(result["pharmacopuncture_schedule"])}</tbody></table>
         </div>
         <div class="rule-panel ict">
-          <h3>ICT <em>사고일 기준</em></h3>
-          <p class="phase">{escape(str(ict["phase"]))}</p>
+          <h3 class="ict-heading"><span>ICT</span><b>{escape(str(ict["phase"]))}</b><em>사고일 기준</em></h3>
           <div class="ict-row"><span>외래</span><b>{escape(str(ict["outpatient"]))}</b></div>
           <div class="ict-row"><span>입원</span><b>{escape(str(ict["inpatient"]))}</b></div>
         </div>
@@ -105,7 +104,7 @@ def report_html(
         <div class="qa-grid">
           <article>
             <h4>교통사고 발생 후 입원이 가능한가요?</h4>
-            <p>입원은 교통사고 발생일로부터 3일 이내 가능하며, 진료상 필요성은 의료진이 판단합니다.</p>
+            <p>입원은 교통사고 발생일로부터 <strong class="alert">3일 이내 가능하며</strong>,<br>진료상 필요성은 의료진이 판단합니다.</p>
           </article>
           <article>
             <h4>어떤 치료를 받을 수 있나요?</h4>
@@ -113,7 +112,7 @@ def report_html(
           </article>
           <article>
             <h4>첩약 처방을 같이 받을 수 있나요?</h4>
-            <p>사고 이후 증상 회복을 위한 한약 처방이 가능하며, 일반적으로 21일분, 골절 진단 시 28일분 처방을 안내합니다.</p>
+            <p>사고 이후 증상 회복을 위한 한약 처방이 가능하며,<br><strong class="alert">일반적으로 21일분, 골절 진단 시 28일분</strong> 처방을 안내합니다.</p>
           </article>
           <article>
             <h4>통증이 점점 심해지는 이유가 있나요?</h4>
@@ -121,7 +120,7 @@ def report_html(
           </article>
           <article class="wide">
             <h4>보험 처리에 필요한 서류가 있나요?</h4>
-            <p>자동차보험 치료기간이 4주를 넘는 경우 보험사에 진단서 제출이 필요할 수 있으며, 추가 치료는 주치의 판단에 따라 안내됩니다.</p>
+            <p><strong class="alert">자동차보험 치료기간이 4주를 넘는 경우 보험사에 진단서 제출이 필요할 수 있으며,</strong><br><strong class="alert">진단서를 제출할 경우 2주간 추가 치료가 가능합니다.</strong> 이후 추가 치료는 주치의 판단에 따라 안내됩니다.</p>
           </article>
         </div>
       </div>
@@ -195,16 +194,19 @@ td:last-child { font-weight: 700; text-align: right; white-space: nowrap; }
 tr.current { background: var(--active); color: #085b56; }
 .badge { background: var(--teal); border-radius: 9px; color: white; font-size: 7px; margin-left: 4px; padding: 1px 4px; }
 .rules-grid .rule-panel:nth-child(n+3) { padding-top: 6px; padding-bottom: 6px; }
-.phase { background: var(--active); border-radius: 6px; color: #075b55; font-size: 9px; font-weight: bold; margin: 0 0 4px; padding: 4px 6px; }
+.ict-heading { align-items: center; display: flex; gap: 8px; }
+.ict-heading b { color: #075b55; font-size: 10.5px; font-weight: 700; }
+.ict-heading em { margin-left: auto; }
 .ict-row { align-items: center; border-top: 1px solid #e9efee; display: flex; justify-content: space-between; font-size: 8.5px; padding: 3px; }
 .ict-row span { color: var(--muted); }
-.qa-section { margin-top: 8px; }
-.qa-section h2 { color: var(--navy); font-size: 12px; margin: 0 0 5px; }
-.qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 7px; }
-.qa-grid article { background: #f5f8f7; border-radius: 6px; padding: 5px 7px; }
+.qa-section { margin-top: 9px; }
+.qa-section h2 { color: var(--navy); font-size: 12px; margin: 0 0 6px; }
+.qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 8px; }
+.qa-grid article { background: #f5f8f7; border-radius: 6px; min-height: 44px; padding: 7px 8px; }
 .qa-grid article.wide { grid-column: 1 / 3; }
-.qa-grid h4 { color: var(--navy); font-size: 9px; margin: 0 0 2px; }
-.qa-grid p { color: #4c5e69; font-size: 8px; line-height: 1.35; margin: 0; }
+.qa-grid h4 { color: var(--navy); font-size: 9px; font-weight: 700; line-height: 1.3; margin: 0 0 5px; }
+.qa-grid p { color: #4c5e69; font-size: 8px; line-height: 1.55; margin: 0; }
+.qa-grid .alert { color: #c62828; font-weight: 700; }
 .notice { background: var(--warm); border-left: 2px solid #c79d42; border-radius: 6px; display: flex; gap: 8px; margin-top: 7px; padding: 5px 7px; }
 .notice strong { color: #6e5116; flex-shrink: 0; font-size: 8px; }
 .notice p { color: #5c5660; font-size: 7px; line-height: 1.35; margin: 0; }
