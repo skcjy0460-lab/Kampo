@@ -93,11 +93,36 @@ def report_html(
           <p class="phase">{escape(str(ict["phase"]))}</p>
           <div class="ict-row"><span>외래</span><b>{escape(str(ict["outpatient"]))}</b></div>
           <div class="ict-row"><span>입원</span><b>{escape(str(ict["inpatient"]))}</b></div>
-          <p class="mini">1-17일: 외래 1회/2부위, 입원 2회/2부위<br>18일 이후: 외래 1회/1부위, 입원 2회/1부위</p>
         </div>
         <div class="rule-panel">
           <h3>자락관법 <em>초진일 기준</em></h3>
           <table><tbody>{schedule_rows(result["cupping_schedule"])}</tbody></table>
+        </div>
+      </div>
+
+      <div class="qa-section">
+        <h2>교통사고 치료 Q&A</h2>
+        <div class="qa-grid">
+          <article>
+            <h4>교통사고 발생 후 입원이 가능한가요?</h4>
+            <p>입원은 교통사고 발생일로부터 3일 이내 가능하며, 진료상 필요성은 의료진이 판단합니다.</p>
+          </article>
+          <article>
+            <h4>어떤 치료를 받을 수 있나요?</h4>
+            <p>침, 뜸, 부항, 추나, 약침, 한약, 외용제, 온열치료, 물리치료 등 증상에 맞는 치료가 적용됩니다.</p>
+          </article>
+          <article>
+            <h4>첩약 처방을 같이 받을 수 있나요?</h4>
+            <p>사고 이후 증상 회복을 위한 한약 처방이 가능하며, 일반적으로 21일분, 골절 진단 시 28일분 처방을 안내합니다.</p>
+          </article>
+          <article>
+            <h4>통증이 점점 심해지는 이유가 있나요?</h4>
+            <p>사고 후 3~7일 동안 통증이 증가하거나 양상이 달라질 수 있어, 초기 경과 관찰과 적극적인 치료가 중요합니다.</p>
+          </article>
+          <article class="wide">
+            <h4>보험 처리에 필요한 서류가 있나요?</h4>
+            <p>자동차보험 치료기간이 4주를 넘는 경우 보험사에 진단서 제출이 필요할 수 있으며, 추가 치료는 주치의 판단에 따라 안내됩니다.</p>
+          </article>
         </div>
       </div>
 
@@ -136,47 +161,54 @@ CSS = """
 }
 .print-sheet {
   box-sizing: border-box; width: 210mm; min-height: 276mm; margin: 0 auto;
-  padding: 13mm 14mm 11mm; background: white; color: var(--ink);
+  padding: 8mm 13mm 8mm; background: white; color: var(--ink);
   box-shadow: 0 8px 32px rgba(17, 39, 58, .10);
   font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
 }
-.title-row { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid var(--navy); padding-bottom: 5mm; }
-.eyebrow { color: var(--teal); letter-spacing: .16em; font-size: 9px; font-weight: 700; margin: 0 0 5px; }
-h1 { color: var(--navy); font-size: 27px; letter-spacing: -.06em; margin: 0 0 5px; }
-.subtitle { color: var(--muted); font-size: 11px; margin: 0; }
-.reference { text-align: right; background: var(--mist); border-radius: 12px; padding: 11px 13px; min-width: 124px; }
-.reference span, .reference small { display: block; color: var(--muted); font-size: 10px; }
-.reference strong { display: block; color: var(--navy); font-size: 17px; margin: 4px 0; }
-.patient-card { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 12px; margin-top: 6mm; overflow: hidden; }
-.patient-card div { padding: 12px 13px; border-right: 1px solid var(--line); }
+.title-row { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--navy); padding-bottom: 3mm; }
+.eyebrow { color: var(--teal); letter-spacing: .16em; font-size: 7.5px; font-weight: 700; margin: 0 0 3px; }
+.print-sheet h1 { color: var(--navy); font-size: 21px !important; letter-spacing: -.06em; line-height: 1.15; margin: 0 0 3px !important; padding: 0 !important; }
+.subtitle { color: var(--muted); font-size: 9.5px; margin: 0; }
+.reference { text-align: right; background: var(--mist); border-radius: 10px; padding: 7px 10px; min-width: 111px; }
+.reference span, .reference small { display: block; color: var(--muted); font-size: 8.5px; }
+.reference strong { display: block; color: var(--navy); font-size: 14px; margin: 2px 0; }
+.patient-card { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 9px; margin-top: 3.5mm; overflow: hidden; }
+.patient-card div { padding: 7px 10px; border-right: 1px solid var(--line); }
 .patient-card div:last-child { border-right: 0; }
-.patient-card span { display: block; color: var(--muted); font-size: 10px; margin-bottom: 5px; }
-.patient-card strong { font-size: 13px; }
-.section-title { display: flex; align-items: baseline; justify-content: space-between; margin: 8mm 0 3mm; }
-.section-title h2 { font-size: 17px; margin: 0; letter-spacing: -.04em; }
-.section-title p { color: var(--muted); font-size: 10px; margin: 0; }
+.patient-card span { display: block; color: var(--muted); font-size: 8.5px; margin-bottom: 3px; }
+.patient-card strong { display: block; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.section-title { display: flex; align-items: baseline; justify-content: space-between; margin: 4mm 0 2mm; }
+.section-title h2 { font-size: 14px; margin: 0; letter-spacing: -.04em; }
+.section-title p { color: var(--muted); font-size: 8.5px; margin: 0; }
 .status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.status-grid article { background: var(--navy); border-radius: 10px; color: white; min-height: 66px; padding: 10px 12px; }
-.status-grid label { color: #bdcecf; display: block; font-size: 10px; margin-bottom: 5px; }
-.status-grid strong { display: block; font-size: 15px; }
-.status-grid small { color: #c9dbd9; font-size: 9px; }
-.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 9px; }
-.rule-panel { border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
-.rule-panel h3 { font-size: 12px; margin: 0 0 8px; color: var(--navy); }
-.rule-panel h3 em { font-style: normal; color: var(--teal); float: right; font-size: 10px; }
-table { border-collapse: collapse; width: 100%; font-size: 10px; }
-td { border-top: 1px solid #e9efee; padding: 5px 4px; }
+.status-grid article { background: var(--navy); border-radius: 8px; color: white; min-height: 48px; padding: 7px 10px; }
+.status-grid label { color: #bdcecf; display: block; font-size: 8.5px; margin-bottom: 3px; }
+.status-grid strong { display: block; font-size: 12.5px; }
+.status-grid small { color: #c9dbd9; font-size: 7.5px; }
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 7px; }
+.rule-panel { border: 1px solid var(--line); border-radius: 8px; padding: 7px 8px; }
+.rule-panel h3 { font-size: 10.5px; margin: 0 0 5px; color: var(--navy); }
+.rule-panel h3 em { font-style: normal; color: var(--teal); float: right; font-size: 8.5px; }
+table { border-collapse: collapse; width: 100%; font-size: 8.5px; }
+td { border-top: 1px solid #e9efee; padding: 3px 3px; }
 td:last-child { font-weight: 700; text-align: right; white-space: nowrap; }
 tr.current { background: var(--active); color: #085b56; }
-.badge { background: var(--teal); border-radius: 9px; color: white; font-size: 8px; margin-left: 5px; padding: 2px 5px; }
-.phase { background: var(--active); border-radius: 7px; color: #075b55; font-size: 11px; font-weight: bold; margin: 0 0 7px; padding: 6px 8px; }
-.ict-row { align-items: center; border-top: 1px solid #e9efee; display: flex; justify-content: space-between; font-size: 10px; padding: 5px 4px; }
+.badge { background: var(--teal); border-radius: 9px; color: white; font-size: 7px; margin-left: 4px; padding: 1px 4px; }
+.rules-grid .rule-panel:nth-child(n+3) { padding-top: 6px; padding-bottom: 6px; }
+.phase { background: var(--active); border-radius: 6px; color: #075b55; font-size: 9px; font-weight: bold; margin: 0 0 4px; padding: 4px 6px; }
+.ict-row { align-items: center; border-top: 1px solid #e9efee; display: flex; justify-content: space-between; font-size: 8.5px; padding: 3px; }
 .ict-row span { color: var(--muted); }
-.mini { color: var(--muted); font-size: 9px; line-height: 1.55; margin: 7px 3px 0; }
-.notice { background: var(--warm); border-left: 3px solid #c79d42; border-radius: 7px; display: flex; gap: 12px; margin-top: 9px; padding: 9px 11px; }
-.notice strong { color: #6e5116; flex-shrink: 0; font-size: 11px; }
-.notice p { color: #5c5660; font-size: 9.5px; line-height: 1.55; margin: 0; }
-footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; flex-direction: column; font-size: 8.5px; gap: 3px; line-height: 1.45; margin-top: 10px; padding-top: 8px; }
+.qa-section { margin-top: 8px; }
+.qa-section h2 { color: var(--navy); font-size: 12px; margin: 0 0 5px; }
+.qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 7px; }
+.qa-grid article { background: #f5f8f7; border-radius: 6px; padding: 5px 7px; }
+.qa-grid article.wide { grid-column: 1 / 3; }
+.qa-grid h4 { color: var(--navy); font-size: 9px; margin: 0 0 2px; }
+.qa-grid p { color: #4c5e69; font-size: 8px; line-height: 1.35; margin: 0; }
+.notice { background: var(--warm); border-left: 2px solid #c79d42; border-radius: 6px; display: flex; gap: 8px; margin-top: 7px; padding: 5px 7px; }
+.notice strong { color: #6e5116; flex-shrink: 0; font-size: 8px; }
+.notice p { color: #5c5660; font-size: 7px; line-height: 1.35; margin: 0; }
+footer { border-top: 1px solid var(--line); color: var(--muted); display: flex; flex-direction: column; font-size: 6.7px; gap: 2px; line-height: 1.3; margin-top: 6px; padding-top: 5px; }
 @media screen and (max-width: 940px) {
   .print-sheet { height: auto; min-height: unset; width: 100%; padding: 24px; }
   .patient-card, .status-grid, .rules-grid { grid-template-columns: 1fr; }
